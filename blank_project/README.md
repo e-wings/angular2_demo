@@ -5,5 +5,10 @@ AngularJS2 的空项目，类似于官方的Quick Start项目，但使用了gulp
 作为项目的开始，省去配置环境的时间。
 
 ## 使用方法
+如果没有安装node,请先安装node。
+
+如果没有安装gulp,请先安装gulp：npm install --global gulp
+
 npm install
+
 gulp
