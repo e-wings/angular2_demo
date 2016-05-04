@@ -6,6 +6,10 @@ AngularJS2 的空项目，类似于官方的Quick Start项目，但使用了gulp
 
 ## 使用方法
 
+git clone https://github.com/e-wings/angular2_demo.git
+
+cd blank_project
+
 npm install
 
 gulp
