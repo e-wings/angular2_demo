@@ -8,7 +8,8 @@
 ![figure2](http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/02/1454391011angular2-components-inputs-and-outputs02-one-way-data-flow-down-hierarchy.png)
 
 ## 项目目的
-作为项目的开始，省去配置环境的时间。
+1 了解angular的Component结构；
+2 了解如何在component间传递参数；
 
 ## 使用方法
 
