@@ -3,8 +3,6 @@
 
 ![figure1](http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/02/1454391007angular2-components-inputs-and-outputs01-component-hierarchy-behaviour.png)
 
-<img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/02/1454391007angular2-components-inputs-and-outputs01-component-hierarchy-behaviour.png">
-
 如果需要反向传递数据，则需要用到outputs事件:
 
 ![figure2](http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/02/1454391011angular2-components-inputs-and-outputs02-one-way-data-flow-down-hierarchy.png)
