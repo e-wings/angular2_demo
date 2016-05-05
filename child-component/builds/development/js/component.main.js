@@ -28,7 +28,7 @@ System.register(['angular2/core', './component.child'], function(exports_1, cont
                     this.nameStr = element.value;
                 };
                 MainComponent.prototype.handleChildOutput = function (arg) {
-                    console.log('received: ' + arg);
+                    alert('父级收到: ' + arg);
                 };
                 MainComponent = __decorate([
                     core_1.Component({

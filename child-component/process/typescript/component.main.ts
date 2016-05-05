@@ -18,6 +18,6 @@ export class MainComponent {
   }
   
   handleChildOutput(arg){
-    console.log('received: '+arg);
+    alert('父级收到: '+arg);
   }
 }

@@ -11,28 +11,35 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var MainComponent;
+    var ChildComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            MainComponent = (function () {
-                function MainComponent() {
+            ChildComponent = (function () {
+                function ChildComponent() {
+                    this.childOutput = new core_1.EventEmitter();
                 }
-                MainComponent = __decorate([
+                ChildComponent.prototype.fireEvent = function () {
+                    console.log("fired");
+                    this.childOutput.next([this.childName]);
+                };
+                ChildComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        template: '<h1>Welcome to my App 欢迎光临</h1>'
+                        selector: 'child-app',
+                        inputs: ['childName'],
+                        outputs: ['childOutput'],
+                        template: "\n        <br/><br/>\n        <input #ChildName [(ngModel)]=childName><br/>\n        <button (click)=\"fireEvent()\">\u4F20\u56DE\u7236Component</button>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
-                ], MainComponent);
-                return MainComponent;
+                ], ChildComponent);
+                return ChildComponent;
             }());
-            exports_1("MainComponent", MainComponent);
+            exports_1("ChildComponent", ChildComponent);
         }
     }
 });
 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=component.child.js.map
