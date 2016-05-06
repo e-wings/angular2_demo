@@ -4,6 +4,8 @@
 
 cd from
 
+npm install
+
 gulp
 
 注意：
