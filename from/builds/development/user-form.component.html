@@ -1,0 +1,53 @@
+<div class="container">
+  <div  [hidden]="submitted">
+    <h1>User Form</h1>
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" required
+          [(ngModel)]="model.name"
+            ngControl="name"  #name="ngForm" >
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control"
+          [(ngModel)]="model.email"
+            ngControl="email" >
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <select class="form-control" required
+          [(ngModel)]="model.city"
+            ngControl="city" #city="ngForm" (change)="onChange($event.target.value)">
+          <option *ngFor="#c of cities" [value]="c">{{c}}</option>
+        </select>
+        <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+          City is required
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default" [disabled]="!userForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newUser()">New User</button>
+    </form>
+  </div>
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9  pull-left">{{ model.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">email</div>
+      <div class="col-xs-9 pull-left">{{ model.email }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">City</div>
+      <div class="col-xs-9 pull-left">{{ model.city }}</div>
+    </div>
+    <br>
+    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  </div>
+</div>
+
