@@ -1,0 +1,7 @@
+{
+    "games":[
+        {"title":"title1","intro":"intro1"} ,
+        {"title":"title2","intro":"intro2"} ,
+        {"title":"title3","intro":"intro3"} 
+    ]
+}
