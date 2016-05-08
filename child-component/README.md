@@ -14,6 +14,8 @@ Use output event to pass parameter frong child component to parent component:
 ## Install
 git clone https://github.com/e-wings/angular2_demo.git
 
+ce angular2_demo
+
 cd child-component
 
 npm install
@@ -46,6 +48,8 @@ Note: You need node and gulp installed first.(npm install --global gulp).
 ## 使用方法
 
 git clone https://github.com/e-wings/angular2_demo.git
+
+cd angular2_demo
 
 cd child-component
 

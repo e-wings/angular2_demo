@@ -8,6 +8,8 @@ Show how to read and loop external json.
 
 git clone https://github.com/e-wings/angular2_demo.git
 
+cd angular2_demo
+
 cd read-json
 
 npm install
@@ -27,6 +29,8 @@ Note: You need node and gulp installed first.(npm install --global gulp).
 ## 使用方法
 
 git clone https://github.com/e-wings/angular2_demo.git
+
+cd angular2_demo
 
 cd read-json
 

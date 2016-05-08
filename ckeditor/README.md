@@ -8,6 +8,8 @@ This project is a nice start point of you own project. Just clone and happy codi
 
 git clone https://github.com/e-wings/angular2_demo.git
 
+cd angular2_demo
+
 cd blank-project
 
 npm install

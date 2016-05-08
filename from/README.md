@@ -1,6 +1,9 @@
 # 表单验证
 
 ## 使用方法
+git clone https://github.com/e-wings/angular2_demo.git
+
+cd angular2_demo
 
 cd from
 
