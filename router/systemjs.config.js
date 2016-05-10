@@ -11,8 +11,8 @@
   //map tells the System loader where to look for things
   var  map = {
     'app':                        'app', // 'dist',
-    'rxjs':                       'http://localhost:3000/node_modules/rxjs',
-    'angular2-in-memory-web-api': 'http://localhost:3000/node_modules/angular2-in-memory-web-api' // get latest
+    'rxjs':                       'http://localhost:8000/node_modules/rxjs',
+    'angular2-in-memory-web-api': 'http://localhost:8000/node_modules/angular2-in-memory-web-api' // get latest
   };
 
   //packages tells the System loader how to load when no filename and/or no extension
@@ -37,7 +37,7 @@
   // add map entries for angular packages in the form '@angular/common': 'https://npmcdn.com/@angular/common@0.0.0-3?main=browser'
   packageNames.forEach(function(pkgName) {
     //map[pkgName] = 'https://npmcdn.com/' + pkgName + ngVer;
-    map[pkgName] = 'http://localhost:3000/node_modules/' + pkgName;
+    map[pkgName] = 'http://localhost:8000/node_modules/' + pkgName;
   });
 
   // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
