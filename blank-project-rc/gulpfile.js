@@ -1,56 +1,129 @@
-var gulp = require('gulp'),
+﻿var gulp = require("gulp"),
     webserver = require('gulp-webserver'),
-    typescript = require('gulp-typescript'),
-    sourcemaps = require('gulp-sourcemaps'),
-    tscConfig = require('./tsconfig.json');
+    concat = require("gulp-concat"),
+    tsc = require("gulp-typescript"),
+    jsMinify = require("gulp-uglify"),
+    cssPrefixer = require("gulp-autoprefixer"),
+    cssMinify = require("gulp-cssnano"),
+    del = require("del"),
+    merge = require("merge-stream"),
+    minifyHTML = require('gulp-htmlmin'),
+    SystemBuilder = require("systemjs-builder");
 
-var appSrc = './',
-    tsSrc = 'app/';
+var appFolder = "./app";
+var outFolder = "wwwroot";
 
-gulp.task('html', function() {
-  gulp.src(appSrc + '**/*.html');
+gulp.task("clean", () => {
+    return del(outFolder);
 });
 
-gulp.task('css', function() {
-  gulp.src(appSrc + '**/*.css');
-});
-
-gulp.task('copylibs', function() {
-  return gulp
-    .src([
-      'node_modules/es6-shim/es6-shim.min.js',
-      'node_modules/systemjs/dist/system-polyfills.js',
-      'node_modules/systemjs/dist/system.src.js',
-      'node_modules/rxjs/bundles/Rx.js',
-      'node_modules/zone.js/dist/zone.min.js',
-      'node_modules/reflect-metadata/Reflect.js',
-      'node_modules/systemjs/dist/system.js',
-      'node_modules/typescript/lib/typescript.js'
+gulp.task("shims", () => {
+    return gulp.src([
+            "node_modules/es6-shim/es6-shim.js",
+            "node_modules/zone.js/dist/zone.js",
+            "node_modules/reflect-metadata/Reflect.js",
+            "node_modules/systemjs/dist/system.js"
     ])
-    .pipe(gulp.dest(appSrc + 'app/js/lib/angular2'));
+    .pipe(concat("shims.js"))
+    .pipe(jsMinify())
+    .pipe(gulp.dest(outFolder + "/js/"));
 });
 
-gulp.task('typescript', function () {
-  return gulp
-    .src(tsSrc + '**/*.ts')
-    .pipe(sourcemaps.init())
-    .pipe(typescript(tscConfig.compilerOptions))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(appSrc + 'app/js/'));
+gulp.task("tsc", () => {
+    var tsProject = tsc.createProject("./tsconfig.json");
+    var tsResult = gulp.src([
+         appFolder + "/**/*.ts"
+    ])
+    .pipe(tsc(tsProject), undefined, tsc.reporter.fullReporter());
+
+    return tsResult.js.pipe(gulp.dest("build/"));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(tsSrc + '**/*.ts', ['typescript']);
-  gulp.watch(appSrc + 'css/*.css', ['css']);
-  gulp.watch(appSrc + '**/*.html', ['html']);
+gulp.task("system-build", ["tsc"], () => {
+    var builder = new SystemBuilder();
+
+    return builder.loadConfig("systemjs.config.js")
+        .then(() => builder.buildStatic(appFolder, outFolder + "/js/bundle.js"))
+        .then(() => del("build"));
+});
+
+
+gulp.task("buildAndMinify", ["system-build"], () => {
+    var bundle = gulp.src(outFolder + "/js/bundle.js")
+        .pipe(jsMinify())
+        .pipe(gulp.dest(outFolder + "/js/"));
+
+    var css = gulp.src(outFolder + "/css/styles.css")
+        .pipe(cssMinify())
+        .pipe(gulp.dest(outFolder + "/css/"));
+
+    return merge(bundle, css);
+});
+
+
+gulp.task("favicon", function () {
+    return gulp.src(appFolder + "/favicon.ico")
+      .pipe(gulp.dest(outFolder));
+});
+
+gulp.task("css", function () {
+    return gulp.src(appFolder + "/**/*.css")
+      .pipe(cssPrefixer())
+      .pipe(cssMinify())
+      .pipe(gulp.dest(outFolder));
+});
+
+gulp.task("templates", function () {
+    return gulp.src(appFolder + "/**/*.html")
+        .pipe(minifyHTML())
+        .pipe(gulp.dest(outFolder));
+});
+
+gulp.task("assets", ["templates", "css", "favicon"], function () {
+    return gulp.src(appFolder + "/**/*.png")
+      .pipe(gulp.dest(outFolder));
+});
+
+
+gulp.task("otherScriptsAndStyles", () => {
+    gulp.src([
+            "jquery/dist/jquery.*js",
+            "bootstrap/dist/js/bootstrap*.js"
+    ], {
+        cwd: "node_modules/**"
+    })
+    .pipe(gulp.dest(outFolder + "/js/"));
+
+    gulp.src([
+        "node_modules/bootstrap/dist/css/bootstrap.css"
+    ]).pipe(cssMinify()).pipe(gulp.dest(outFolder + "/css/"));
+
+    gulp.src([
+        "node_modules/bootstrap/fonts/*.*"
+    ]).pipe(gulp.dest(outFolder + "/fonts/"));
 });
 
 gulp.task('webserver', function() {
-  gulp.src(appSrc)
+  gulp.src("./")
     .pipe(webserver({
       livereload: true,
       open: true
     }));
 });
 
-gulp.task('default', ['copylibs', 'typescript', 'watch', 'webserver']);
+
+//gulp.task("watch.tsc", ["tsc"], function () {
+//    return gulp.watch(appFolder + "/**/*.ts", ["tsc"]);
+//});
+
+//gulp.task("watch", ["watch.tsc"]);
+
+
+gulp.task("default", [
+    "shims",
+    "buildAndMinify",
+    "assets",
+    "otherScriptsAndStyles",
+    "webserver"
+    //,"watch"
+]);

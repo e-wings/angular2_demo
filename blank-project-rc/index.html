@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html>
 <html>
   <head>
-    <!-- Set the base href -->
-    <script>document.write('<base href="' + document.location + '" />');</script>
-    <title>Router Sample</title>
+    <title>Angular 2 QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Polyfill(s) for older browsers -->
-    <script src="./app/js/lib/angular2/es6-shim.min.js"></script>
-
-    <script src="./app/js/lib/angular2/zone.min.js"></script>
-    <script src="./app/js/lib/angular2/Reflect.js"></script>
-    <script src="./app/js/lib/angular2/system.js"></script>
-    <script src="./app/js/lib/angular2/typescript.js"></script>
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err);  });
-    </script>
+    
+    <script src="wwwroot/js/shims.js"></script>
   </head>
 
   <body>
-    <my-app>loading...</my-app>
+    <my-app>Loading...</my-app>
+    
+    <script src="wwwroot/js/bundle.js"></script>
   </body>
-
 </html>
-
-
-<!-- 
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
--->
