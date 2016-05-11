@@ -1,8 +1,8 @@
-# 空项目搭建
+# 路由
 
 ## 使用方法
 
-cd blank-project-rc
+cd router-rc
 
 npm install
 
