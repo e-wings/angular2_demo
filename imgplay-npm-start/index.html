@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<html>
+  <head>
+    <!-- Set the base href -->
+    <base href="/">
+    <title>Router Sample</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="./app/js/es6-shim.min.js"></script>
+    <script src="./app/js/jquery.min.js"></script>
+    <script src="./app/js/zone.min.js"></script>
+    <script src="./app/js/Reflect.js"></script>
+    <script src="./app/js/system.js"></script>
+    <script src="./app/js/typescript.js"></script>
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err);  });
+    </script>
+  </head>
+
+  <body>
+    <my-app>loading...</my-app>
+    <h3 class="start">0%</h3>
+    <canvas id="myCanvas" width="800" height="400" style="background-color:black"></canvas>
+    <div class="image_holder" style="display:none"></div>
+  </body>
+
+</html>
+
+
+<!-- 
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
