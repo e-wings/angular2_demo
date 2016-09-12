@@ -34,9 +34,9 @@
       //'@angular/upgrade',
   ];
 
-  // add map entries for angular packages in the form '@angular/common': 'https://npmcdn.com/@angular/common@0.0.0-3?main=browser'
+  // add map entries for angular packages in the form '@angular/common': 'https://unpkg.com/@angular/common@0.0.0-3?main=browser'
   packageNames.forEach(function(pkgName) {
-    //map[pkgName] = 'https://npmcdn.com/' + pkgName + ngVer;
+    //map[pkgName] = 'https://unpkg.com/' + pkgName + ngVer;
     map[pkgName] = 'http://localhost:8000/node_modules/' + pkgName;
   });
 
